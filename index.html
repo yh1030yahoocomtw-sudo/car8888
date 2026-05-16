@@ -7,92 +7,80 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="app-header">
+  <header class="topbar">
     <div>
-      <p class="eyebrow">Model Car Market Tracker</p>
+      <p class="eyebrow">Diecast Market Tracker</p>
       <h1>模型車行情追蹤</h1>
-      <p class="subtitle">上傳照片、記錄價格、查詢同款模型車目前行情。</p>
+      <p class="sub">記錄價格、照片、行情，系統自動算建議購買價。</p>
     </div>
-    <button id="exportBtn" class="ghost-btn">匯出資料</button>
+    <button id="exportBtn" class="ghost">匯出備份</button>
   </header>
 
   <main class="layout">
     <section class="panel form-panel">
-      <h2>新增價格紀錄</h2>
-      <form id="carForm">
-        <label>模型車照片
+      <h2>新增行情紀錄</h2>
+      <form id="recordForm">
+        <label>照片
           <input id="photo" type="file" accept="image/*" />
         </label>
-        <div id="preview" class="preview empty">照片預覽</div>
+        <img id="preview" class="preview hidden" alt="照片預覽" />
 
-        <div class="grid-2">
+        <div class="grid2">
           <label>品牌
-            <input id="brand" required placeholder="例如 MINI GT / Tomica / Hot Wheels" />
+            <input id="brand" placeholder="例：MINI GT / Tomica" required />
           </label>
           <label>比例
-            <input id="scale" placeholder="例如 1:64" />
+            <input id="scale" placeholder="例：1:64" />
           </label>
         </div>
 
         <label>車款 / 關鍵字
-          <input id="model" required placeholder="例如 Nissan GT-R R35 LBWK 白色" />
+          <input id="model" placeholder="例：Nissan GT-R R35 LBWK 白色" required />
         </label>
 
-        <div class="grid-2">
-          <label>看到的價格 NT$
-            <input id="price" required type="number" min="0" step="1" placeholder="370" />
+        <div class="grid2">
+          <label>價格
+            <input id="price" type="number" min="0" placeholder="例：370" required />
           </label>
-          <label>平台 / 來源
-            <input id="source" placeholder="蝦皮、露天、FB社團、拍賣" />
+          <label>來源
+            <input id="source" placeholder="蝦皮 / FB / 露天" />
           </label>
         </div>
 
-        <div class="grid-2">
-          <label>狀態
-            <select id="status">
-              <option>掛售中</option>
-              <option>已售</option>
-              <option>得標</option>
-              <option>自填紀錄</option>
-            </select>
-          </label>
-          <label>日期
-            <input id="date" type="date" />
-          </label>
-        </div>
+        <label>狀態
+          <select id="status">
+            <option>掛售中</option>
+            <option>已售</option>
+            <option>自己買入</option>
+            <option>觀察價</option>
+          </select>
+        </label>
 
         <label>備註
-          <textarea id="note" rows="3" placeholder="例如 含盒、全新、拆封、運費另計"></textarea>
+          <textarea id="note" rows="3" placeholder="例：含盒、拆封、盒損、限定版"></textarea>
         </label>
 
-        <button class="primary-btn" type="submit">儲存紀錄</button>
+        <button class="primary" type="submit">加入紀錄</button>
       </form>
     </section>
 
-    <section class="panel search-panel">
-      <div class="section-head">
-        <h2>查詢目前行情</h2>
-        <button id="clearBtn" class="ghost-btn danger">清空資料</button>
-      </div>
-      <div class="search-box">
-        <input id="search" placeholder="輸入品牌、車款、顏色或比例查行情" />
-      </div>
+    <section class="main-area">
+      <section class="panel search-panel">
+        <div>
+          <h2>查詢目前行情</h2>
+          <p>輸入品牌、車款、顏色或比例。</p>
+        </div>
+        <input id="search" class="search" placeholder="搜尋：MINI GT R35 白色" />
+      </section>
 
-      <div id="stats" class="stats empty-state">
-        還沒有資料。先新增一筆價格紀錄。
-      </div>
-
-      <h3>模型車清單</h3>
-      <div id="carList" class="car-list"></div>
+      <section class="stats" id="summaryStats"></section>
+      <section id="cards" class="cards"></section>
     </section>
   </main>
 
   <dialog id="detailDialog">
-    <div class="dialog-head">
-      <h2 id="detailTitle"></h2>
-      <button id="closeDialog" class="ghost-btn">關閉</button>
-    </div>
-    <div id="detailBody"></div>
+    <button id="closeDialog" class="close">×</button>
+    <div id="detailContent"></div>
   </dialog>
 
   <script src="app.js"></script>
