@@ -9,11 +9,12 @@
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">Diecast Market Tracker</p>
+      <p class="eyebrow">Diecast Market Tracker v3</p>
       <h1>模型車行情追蹤</h1>
-      <p class="sub">記錄價格、照片、行情，系統自動算建議購買價。</p>
+      <p class="sub">照片、行情、建議購買價、備份匯入，手機更好用。</p>
     </div>
     <button id="exportBtn" class="ghost">匯出備份</button>
+    <label class="ghost filebtn">匯入備份<input id="importFile" type="file" accept="application/json" hidden></label>
   </header>
 
   <main class="layout">
@@ -47,12 +48,11 @@
           </label>
         </div>
 
-        <label>狀態
-          <select id="status">
-            <option>掛售中</option>
-            <option>已售</option>
-            <option>自己買入</option>
-            <option>觀察價</option>
+        <label>車況
+          <select id="condition">
+            <option>拆檢</option>
+            <option>全新</option>
+            <option>瑕疵</option>
           </select>
         </label>
 
@@ -82,6 +82,7 @@
     <button id="closeDialog" class="close">×</button>
     <div id="detailContent"></div>
   </dialog>
+  <div id="toast" class="toast hidden"></div>
 
   <script src="app.js"></script>
 </body>
